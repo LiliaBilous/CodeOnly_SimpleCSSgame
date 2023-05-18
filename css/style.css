@@ -18,6 +18,46 @@ body{
     left: 0;
     cursor: url('../img/run.png') 24 24, auto;
 }
+.game:hover .game__win {
+    animation: win 60s steps(1) forwards;
+}
+.game:hover .game__counter::after {
+    animation: timer_1 60s steps(60) forwards;
+}
+.game:hover .game__result span::after {
+    animation: timer_2 60s steps(60) forwards;
+}
+@keyframes win {
+    0% {
+    }
+    100% {
+        visibility: visible;
+    }
+}
+@keyframes timer_1 {
+    0% {
+        text-indent: -300ch;
+    }
+    50% {
+        color: #dac924;
+    }
+    100% {
+        color: #ff7b50;
+        text-indent: 0ch;
+    }
+}
+@keyframes timer_2 {
+    0% {
+        text-indent: 0ch;
+    }
+    50% {
+        color: #dac924;
+    }
+    100% {
+        color: #ff7b50;
+        text-indent: -300ch;
+    }
+}
 .game__body,
 .game__items {
     position: absolute;
@@ -118,9 +158,36 @@ body{
         transform: translate(0, 0);
     }
 }
-
+.game__body:hover::before,
+.game__body:hover::after,
+.game__body:hover .game__items::before,
+.game__body:hover .game__items::after {
+    display: none;
+}
+.game__body:hover .game__items {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    background-color: #262c37;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    pointer-events: all;
+}
 .game__result {
     font-size: 2.5rem;
+    visibility: hidden;
+}
+.game__body:hover .game__result  {
+    visibility: visible;
+}
+.game__body:hover .game__counter::after,
+.game__body:hover .game__result span::after {
+    animation-play-state: paused;
 }
 .game__result span {
     font-size: 2.5rem;
